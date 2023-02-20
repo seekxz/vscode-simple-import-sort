@@ -3,6 +3,7 @@
   "displayName": "simple import sort",
   "description": "",
   "version": "0.0.1",
+  "publisher": "seekxz",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -10,14 +11,21 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:simple-import-sort.helloWorld"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "simple-import-sort.helloWorld",
-        "title": "Hello World"
+        "command": "simple-import-sort.sortImport",
+        "title": "sort import"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "simple-import-sort.sortImport",
+        "key": "ctrl+s",
+        "mac": "cmd+s",
+        "when": "editorTextFocus && editorLangId == typescript || editorLangId == javascript || editorLangId == vue || editorLangId == jsx || editorLangId == tsx"
       }
     ]
   },

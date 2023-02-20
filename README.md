@@ -1,71 +1,46 @@
-# simple-import-sort README
+# simple-import-sort
 
-This is the README for your extension "simple-import-sort". After writing up a brief description, we recommend including the following sections.
+in `js`, `ts`, `jsx`, `tsx`, `vue` files, sort imports on save.
 
-## Features
+## Collation
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The import of modules should be sorted by the principle of "from large to small, from far to near", and the blank line should be added to group them.
 
-For example if there is an image subfolder under your extension project workspace:
+1. If it is an `npm` package, sort it in alphabetical order
+2. If you encounter a package starting with `@`, sort it according to the content after `@`
+3. If it is `*` all imports
+4. If it is a local file, sort it according to the principle of "from large to small, from far to near" according to `../` or `./`
+5. Style import
+6. Comment import
+7. Multi-line import statement import
+8. Import directly add url import
 
-\!\[feature X\]\(images/feature-x.png\)
+## Reason
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+When writing `go`, `goland` can automatically call `go fmt` to optimize the order of the code in the `import` section.
 
-## Requirements
+But in the front-end project, you can configure `eslint` with `sort-imports`, but the function is limited. So look for third-party plug-ins `eslint-plugin-simple-import-sort`.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+However, it needs to be configured through eslint, and if you need to configure `prettier` together when saving, it is more troublesome.
+In addition, you can also configure vscode's `editor.codeActionsOnSave` to achieve automatic repair of `eslint`.
 
-## Extension Settings
+## Installation
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+```js
+// npm package
+import React from 'react'
+import {Link} from 'react-router-dom'
 
-For example:
+// project common function, common components, etc.
+import {get} from '@/utils'
+import BaseModal from '@/components/BaseModal'
 
-This extension contributes the following settings:
+// constants
+import {BASE_URL} from '@/constants'
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+// page components
+import TipModal from './tip-modal'
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+// style
+import styles from './index.less'
+```
